@@ -39,14 +39,14 @@ export default function MarketingPage() {
 
               <SignInButton mode="modal">
                 <Button size="lg" variant="primaryOutline" className="w-full">
-                  J'ai déjà un compte
+                  J&apos;ai déjà un compte
                 </Button>
               </SignInButton>
             </SignedOut>
 
             <SignedIn>
               <Button size="lg" variant="secondary" className="w-full" asChild>
-                <Link href="/learn">Continuer l'apprentissage</Link>
+                <Link href="/learn">Continuer l&apos;apprentissage</Link>
               </Button>
             </SignedIn>
           </ClerkLoaded>
