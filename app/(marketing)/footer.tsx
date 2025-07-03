@@ -60,6 +60,17 @@ export const Footer = () => {
           />
           C++
         </Button>
+
+        <Button size="lg" variant="ghost" className="w-full cursor-default">
+          <Image
+            src="/rust.svg"
+            alt="Rust"
+            height={32}
+            width={40}
+            className="mr-4 rounded-md"
+          />
+          Rust
+        </Button>
       </div>
     </div>
   );
