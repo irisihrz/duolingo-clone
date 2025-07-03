@@ -1,5 +1,6 @@
 import { challengeOptions, challenges } from "@/db/schema";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 import { Card } from "./card";
 
@@ -20,6 +21,13 @@ export const Challenge = ({
   disabled,
   type,
 }: ChallengeProps) => {
+  // Mélange les options une seule fois quand la question change
+  const [shuffledOptions, setShuffledOptions] = useState(options);
+
+  useEffect(() => {
+    setShuffledOptions([...options].sort(() => Math.random() - 0.5));
+  }, [options]);
+
   return (
     <div
       className={cn(
@@ -29,7 +37,7 @@ export const Challenge = ({
           "grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]"
       )}
     >
-      {options.map((option, i) => (
+      {shuffledOptions.map((option, i) => (
         <Card
           key={option.id}
           id={option.id}

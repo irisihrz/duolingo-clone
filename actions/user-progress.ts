@@ -18,14 +18,14 @@ export const upsertUserProgress = async (courseId: number) => {
   const { userId } = await auth();
   const user = await currentUser();
 
-  if (!userId || !user) throw new Error("Unauthorized.");
+  if (!userId || !user) throw new Error("Non autorisé.");
 
   const course = await getCourseById(courseId);
 
-  if (!course) throw new Error("Course not found.");
+  if (!course) throw new Error("Cours non trouvé.");
 
   if (!course.units.length || !course.units[0].lessons.length)
-    throw new Error("Course is empty.");
+    throw new Error("Cours vide.");
 
   const existingUserProgress = await getUserProgress();
 
@@ -59,7 +59,7 @@ export const upsertUserProgress = async (courseId: number) => {
 export const reduceHearts = async (challengeId: number) => {
   const { userId } = await auth();
 
-  if (!userId) throw new Error("Unauthorized.");
+  if (!userId) throw new Error("Non autorisé.");
 
   const currentUserProgress = await getUserProgress();
   const userSubscription = await getUserSubscription();
@@ -68,7 +68,7 @@ export const reduceHearts = async (challengeId: number) => {
     where: eq(challenges.id, challengeId),
   });
 
-  if (!challenge) throw new Error("Challenge not found.");
+  if (!challenge) throw new Error("Défi non trouvé.");
 
   const lessonId = challenge.lessonId;
 
@@ -83,7 +83,7 @@ export const reduceHearts = async (challengeId: number) => {
 
   if (isPractice) return { error: "practice" };
 
-  if (!currentUserProgress) throw new Error("User progress not found.");
+  if (!currentUserProgress) throw new Error("Progression utilisateur non trouvée.");
 
   if (userSubscription?.isActive) return { error: "subscription" };
 
@@ -106,11 +106,11 @@ export const reduceHearts = async (challengeId: number) => {
 export const refillHearts = async () => {
   const currentUserProgress = await getUserProgress();
 
-  if (!currentUserProgress) throw new Error("User progress not found.");
+  if (!currentUserProgress) throw new Error("Progression utilisateur non trouvée.");
   if (currentUserProgress.hearts === MAX_HEARTS)
-    throw new Error("Hearts are already full.");
+    throw new Error("Les cœurs sont déjà pleins.");
   if (currentUserProgress.points < POINTS_TO_REFILL)
-    throw new Error("Not enough points.");
+    throw new Error("Pas assez de points.");
 
   await db
     .update(userProgress)

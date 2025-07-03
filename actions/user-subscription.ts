@@ -12,7 +12,7 @@ export const createStripeUrl = async () => {
   const { userId } = await auth();
   const user = await currentUser();
 
-  if (!userId || !user) throw new Error("Unauthorized.");
+  if (!userId || !user) throw new Error("Non autorisé.");
 
   const userSubscription = await getUserSubscription();
 
@@ -38,7 +38,7 @@ export const createStripeUrl = async () => {
           currency: "USD",
           product_data: {
             name: "HelloRooty Pro",
-            description: "Unlimited hearts.",
+            description: "Cœurs illimités.",
           },
           unit_amount: 2000, // $20.00 USD
           recurring: {
