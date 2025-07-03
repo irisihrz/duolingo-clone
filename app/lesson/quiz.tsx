@@ -182,7 +182,7 @@ export const Quiz = ({
           />
 
           <h1 className="text-lg font-bold text-neutral-700 lg:text-3xl">
-            Great job! <br /> You&apos;ve completed the lesson.
+            Excellent! <br /> You&apos;ve completed the programming lesson.
           </h1>
 
           <div className="flex w-full items-center gap-x-4">
@@ -205,7 +205,7 @@ export const Quiz = ({
 
   const title =
     challenge.type === "ASSIST"
-      ? "Select the correct meaning"
+      ? "Select the correct answer"
       : challenge.question;
 
   return (

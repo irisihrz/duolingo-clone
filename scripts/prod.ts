@@ -23,10 +23,16 @@ const main = async () => {
       db.delete(schema.userSubscription),
     ]);
 
-    // Insert courses
+    // Insert programming language courses
     const courses = await db
       .insert(schema.courses)
-      .values([{ title: "Spanish", imageSrc: "/es.svg" }])
+      .values([
+        { title: "Python", imageSrc: "/python.svg" },
+        { title: "JavaScript", imageSrc: "/javascript.svg" },
+        { title: "TypeScript", imageSrc: "/typescript.svg" },
+        { title: "Java", imageSrc: "/java.svg" },
+        { title: "C++", imageSrc: "/cpp.svg" },
+      ])
       .returning();
 
     // For each course, insert units
@@ -54,272 +60,624 @@ const main = async () => {
         const lessons = await db
           .insert(schema.lessons)
           .values([
-            { unitId: unit.id, title: "Nouns", order: 1 },
-            { unitId: unit.id, title: "Verbs", order: 2 },
-            { unitId: unit.id, title: "Adjectives", order: 3 },
-            { unitId: unit.id, title: "Phrases", order: 4 },
-            { unitId: unit.id, title: "Sentences", order: 5 },
+            { unitId: unit.id, title: "Variables", order: 1 },
+            { unitId: unit.id, title: "Functions", order: 2 },
+            { unitId: unit.id, title: "Loops", order: 3 },
+            { unitId: unit.id, title: "Conditions", order: 4 },
+            { unitId: unit.id, title: "Data Structures", order: 5 },
           ])
           .returning();
 
-        // For each lesson, insert challenges
+        // For each lesson, insert challenges specific to the language
         for (const lesson of lessons) {
-          const challenges = await db
-            .insert(schema.challenges)
-            .values([
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the man"?',
-                order: 1,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the woman"?',
-                order: 2,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the boy"?',
-                order: 3,
-              },
-              {
-                lessonId: lesson.id,
-                type: "ASSIST",
-                question: '"the man"',
-                order: 4,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the zombie"?',
-                order: 5,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the robot"?',
-                order: 6,
-              },
-              {
-                lessonId: lesson.id,
-                type: "SELECT",
-                question: 'Which one of these is "the girl"?',
-                order: 7,
-              },
-              {
-                lessonId: lesson.id,
-                type: "ASSIST",
-                question: '"the zombie"',
-                order: 8,
-              },
-            ])
-            .returning();
+          let challenges;
+          
+          if (course.title === "Python") {
+            challenges = await db
+              .insert(schema.challenges)
+              .values([
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'How do you declare a variable in Python?',
+                  order: 1,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'What is the correct way to create a function in Python?',
+                  order: 2,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'How do you create a loop in Python?',
+                  order: 3,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "ASSIST",
+                  question: 'Write a simple variable declaration in Python',
+                  order: 4,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'What is a list in Python?',
+                  order: 5,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'How do you use if statements in Python?',
+                  order: 6,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'What does "print()" do in Python?',
+                  order: 7,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "ASSIST",
+                  question: 'Write a simple function in Python',
+                  order: 8,
+                },
+              ])
+              .returning();
+          } else if (course.title === "JavaScript") {
+            challenges = await db
+              .insert(schema.challenges)
+              .values([
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'How do you declare a variable in JavaScript?',
+                  order: 1,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'What is the correct way to create a function in JavaScript?',
+                  order: 2,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'How do you create a loop in JavaScript?',
+                  order: 3,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "ASSIST",
+                  question: 'Write a simple variable declaration in JavaScript',
+                  order: 4,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'What is an array in JavaScript?',
+                  order: 5,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'How do you use if statements in JavaScript?',
+                  order: 6,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: 'What does "console.log()" do in JavaScript?',
+                  order: 7,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "ASSIST",
+                  question: 'Write a simple function in JavaScript',
+                  order: 8,
+                },
+              ])
+              .returning();
+          } else {
+            // Default challenges for other languages
+            challenges = await db
+              .insert(schema.challenges)
+              .values([
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: `How do you declare a variable in ${course.title}?`,
+                  order: 1,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: `What is the correct way to create a function in ${course.title}?`,
+                  order: 2,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: `How do you create a loop in ${course.title}?`,
+                  order: 3,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "ASSIST",
+                  question: `Write a simple variable declaration in ${course.title}`,
+                  order: 4,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: `What is an array in ${course.title}?`,
+                  order: 5,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: `How do you use if statements in ${course.title}?`,
+                  order: 6,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "SELECT",
+                  question: `What does "print" do in ${course.title}?`,
+                  order: 7,
+                },
+                {
+                  lessonId: lesson.id,
+                  type: "ASSIST",
+                  question: `Write a simple function in ${course.title}`,
+                  order: 8,
+                },
+              ])
+              .returning();
+          }
 
-          // For each challenge, insert challenge options
+          // For each challenge, insert challenge options specific to the language
           for (const challenge of challenges) {
-            if (challenge.order === 1) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 2) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 3) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 4) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el hombre",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 5) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  imageSrc: "/woman.svg",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/es_zombie.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 6) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el robot",
-                  imageSrc: "/robot.svg",
-                  audioSrc: "/es_robot.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/es_zombie.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  imageSrc: "/boy.svg",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 7) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "la nina",
-                  imageSrc: "/girl.svg",
-                  audioSrc: "/es_girl.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el zombie",
-                  imageSrc: "/zombie.svg",
-                  audioSrc: "/es_zombie.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el hombre",
-                  imageSrc: "/man.svg",
-                  audioSrc: "/es_man.mp3",
-                },
-              ]);
-            }
-
-            if (challenge.order === 8) {
-              await db.insert(schema.challengeOptions).values([
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "la mujer",
-                  audioSrc: "/es_woman.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: true,
-                  text: "el zombie",
-                  audioSrc: "/es_zombie.mp3",
-                },
-                {
-                  challengeId: challenge.id,
-                  correct: false,
-                  text: "el chico",
-                  audioSrc: "/es_boy.mp3",
-                },
-              ]);
+            if (course.title === "Python") {
+              if (challenge.order === 1) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "x = 5",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "let x = 5",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "int x = 5",
+                  },
+                ]);
+              } else if (challenge.order === 2) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "def my_function():",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "function myFunction() {}",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "public void myFunction() {}",
+                  },
+                ]);
+              } else if (challenge.order === 3) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "for i in range(10):",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "for(let i = 0; i < 10; i++) {}",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "for(int i = 0; i < 10; i++) {}",
+                  },
+                ]);
+              } else if (challenge.order === 4) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "name = 'John'",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "let name = 'John'",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "String name = 'John'",
+                  },
+                ]);
+              } else if (challenge.order === 5) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "A collection of items in square brackets",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "A type of function",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "A variable declaration",
+                  },
+                ]);
+              } else if (challenge.order === 6) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "if x > 5:",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "if(x > 5) {}",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "if x > 5 {",
+                  },
+                ]);
+              } else if (challenge.order === 7) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "Displays text on the screen",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "Creates a variable",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "Defines a function",
+                  },
+                ]);
+              } else if (challenge.order === 8) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "def greet(): print('Hello')",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "function greet() { console.log('Hello'); }",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "public void greet() { System.out.println('Hello'); }",
+                  },
+                ]);
+              }
+            } else if (course.title === "JavaScript") {
+              if (challenge.order === 1) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "let x = 5;",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "x = 5",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "int x = 5;",
+                  },
+                ]);
+              } else if (challenge.order === 2) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "function myFunction() {}",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "def my_function():",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "public void myFunction() {}",
+                  },
+                ]);
+              } else if (challenge.order === 3) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "for(let i = 0; i < 10; i++) {}",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "for i in range(10):",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "for(int i = 0; i < 10; i++) {}",
+                  },
+                ]);
+              } else if (challenge.order === 4) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "let name = 'John';",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "name = 'John'",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "String name = 'John';",
+                  },
+                ]);
+              } else if (challenge.order === 5) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "A collection of elements in square brackets",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "A type of function",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "A variable declaration",
+                  },
+                ]);
+              } else if (challenge.order === 6) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "if(x > 5) {}",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "if x > 5:",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "if x > 5 {",
+                  },
+                ]);
+              } else if (challenge.order === 7) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "Displays text in the console",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "Creates a variable",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "Defines a function",
+                  },
+                ]);
+              } else if (challenge.order === 8) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "function greet() { console.log('Hello'); }",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "def greet(): print('Hello')",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "public void greet() { System.out.println('Hello'); }",
+                  },
+                ]);
+              }
+            } else {
+              // Default options for other languages
+              if (challenge.order === 1) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: `int x = 5;`,
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "x = 5",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "let x = 5;",
+                  },
+                ]);
+              } else if (challenge.order === 2) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: `public void myFunction() {}`,
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "def my_function():",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "function myFunction() {}",
+                  },
+                ]);
+              } else if (challenge.order === 3) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: `for(int i = 0; i < 10; i++) {}`,
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "for i in range(10):",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "for(let i = 0; i < 10; i++) {}",
+                  },
+                ]);
+              } else if (challenge.order === 4) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: `String name = "John";`,
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "name = 'John'",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "let name = 'John';",
+                  },
+                ]);
+              } else if (challenge.order === 5) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "A collection of elements",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "A type of function",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "A variable declaration",
+                  },
+                ]);
+              } else if (challenge.order === 6) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: `if(x > 5) {}`,
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "if x > 5:",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "if x > 5 {",
+                  },
+                ]);
+              } else if (challenge.order === 7) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: "Displays text on the screen",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "Creates a variable",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "Defines a function",
+                  },
+                ]);
+              } else if (challenge.order === 8) {
+                await db.insert(schema.challengeOptions).values([
+                  {
+                    challengeId: challenge.id,
+                    correct: true,
+                    text: `public void greet() { System.out.println("Hello"); }`,
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "def greet(): print('Hello')",
+                  },
+                  {
+                    challengeId: challenge.id,
+                    correct: false,
+                    text: "function greet() { console.log('Hello'); }",
+                  },
+                ]);
+              }
             }
           }
         }

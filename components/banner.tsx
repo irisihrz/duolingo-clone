@@ -49,29 +49,7 @@ const Banner = ({ hide, setHide }: BannerProps) => {
       <div className="relative w-full">
         <div className="flex items-center justify-center">
           <p className="text-sm font-normal">
-            📢{" "}
-            <strong className="font-semibold">
-              Account creation is currently not working
-            </strong>{" "}
-            due to Clerk&apos;s 500-user limit. To try it out, please{" "}
-            <Link
-              href={`${links.sourceCode}/fork`}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-green-600 transition-opacity hover:opacity-75"
-            >
-              fork this repo
-            </Link>{" "}
-            or{" "}
-            <Link
-              href={`mailto:${links.email}`}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-green-600 transition-opacity hover:opacity-75"
-            >
-              Contact me
-            </Link>{" "}
-            for access.
+            <strong className="font-semibold">HelloRooty on top</strong> &nbsp;|&nbsp; HelloFlipper bientôt développé par IrisWeb et MxWeb
           </p>
         </div>
 
@@ -82,7 +60,7 @@ const Banner = ({ hide, setHide }: BannerProps) => {
           className="absolute right-0 top-3/4 -translate-y-1/2 rounded-full border border-gray-300 bg-white p-1 opacity-80 hover:opacity-90 sm:top-1/2"
         >
           <XIcon className="size-3" strokeWidth={3} />
-          <span className="sr-only">Close banner</span>
+          <span className="sr-only">Fermer la bannière</span>
         </button>
       </div>
     </div>
