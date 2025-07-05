@@ -1,6 +1,6 @@
 {
-  "name": "duolingo-clone",
-  "version": "1.0.1",
+  "name": "hellorooty",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,16 +14,16 @@
     "db:prod": "tsx ./scripts/prod.ts"
   },
   "author": {
-    "name": "Sanidhya Kumar Verma",
-    "email": "sanidhya.verma12345@gmail.com"
+    "name": "Iris",
+    "email": "contact@hellorooty.com"
   },
-  "description": "Interactive platform for programming language learning with lessons, quizzes, and progress tracking.",
+  "description": "Plateforme interactive pour apprendre les langages de programmation de façon ludique et progressive.",
   "keywords": [
     "reactjs",
     "nextjs",
     "vercel",
     "react",
-    "duolingo-clone",
+    "hellorooty",
     "learn-programming",
     "shadcn",
     "shadcn-ui",
@@ -55,16 +55,16 @@
   ],
   "license": "MIT",
   "bugs": {
-    "email": "sanidhya.verma12345@gmail.com"
+    "email": "contact@hellorooty.com"
   },
   "funding": [
     {
       "type": "patreon",
-      "url": "https://www.patreon.com/sanidhy"
+      "url": "https://www.patreon.com/hellorooty"
     },
     {
       "type": "Buy me a coffee",
-      "url": "https://www.buymeacoffee.com/sanidhy"
+      "url": "https://www.buymeacoffee.com/hellorooty"
     }
   ],
   "dependencies": {
