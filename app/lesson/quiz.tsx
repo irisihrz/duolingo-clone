@@ -24,7 +24,6 @@ import { ResultCard } from "./result-card";
 type QuizProps = {
   initialPercentage: number;
   initialHearts: number;
-  initialLessonId: number;
   initialLessonChallenges: (typeof challenges.$inferSelect & {
     completed: boolean;
     challengeOptions: (typeof challengeOptions.$inferSelect)[];
@@ -39,7 +38,6 @@ type QuizProps = {
 export const Quiz = ({
   initialPercentage,
   initialHearts,
-  initialLessonId,
   initialLessonChallenges,
   userSubscription,
 }: QuizProps) => {

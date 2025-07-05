@@ -22,10 +22,6 @@ const ShopPage = async () => {
 
   const isPro = !!userSubscription?.isActive;
 
-  const onUpgrade = () => {
-    // Cette fonction sera gérée côté client dans le composant Items
-  };
-
   return (
     <div className="flex flex-row-reverse gap-[48px] px-6">
       <StickyWrapper>
@@ -54,7 +50,6 @@ const ShopPage = async () => {
             hearts={userProgress.hearts}
             points={userProgress.points}
             hasActiveSubscription={isPro}
-            onUpgrade={onUpgrade}
           />
         </div>
       </FeedWrapper>

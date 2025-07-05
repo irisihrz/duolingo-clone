@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 
-import { Heart, Zap } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { useHeartsModal } from "@/store/use-hearts-modal";
 
 type ItemsProps = {
   hearts: number;
@@ -20,7 +18,6 @@ export const Items = ({
   hasActiveSubscription,
 }: ItemsProps) => {
   const [pending, setPending] = useState(false);
-  const { open: openHeartsModal } = useHeartsModal();
 
   const onUpgradeClick = () => {
     setPending(true);

@@ -44,7 +44,7 @@ export const HeartsModal = () => {
           </div>
 
           <DialogTitle className="text-center text-2xl font-bold">
-            Vous n'avez plus de cœurs !
+            Vous n&apos;avez plus de cœurs !
           </DialogTitle>
 
           <DialogDescription className="text-center text-base">

@@ -30,7 +30,6 @@ const LessonIdPage = async ({ params }: LessonIdPageProps) => {
 
   return (
     <Quiz
-      initialLessonId={lesson.id}
       initialLessonChallenges={lesson.challenges}
       initialHearts={userProgress.hearts}
       initialPercentage={initialPercentage}
