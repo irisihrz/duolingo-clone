@@ -63,7 +63,7 @@ const App = () => {
         create={ChallengeOptionCreate}
         edit={ChallengeOptionEdit}
         options={{
-          label: "Challenge Options",
+          label: "Options de défi",
         }}
       />
     </Admin>
