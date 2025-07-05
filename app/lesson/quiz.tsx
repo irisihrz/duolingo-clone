@@ -182,7 +182,7 @@ export const Quiz = ({
           />
 
           <h1 className="text-lg font-bold text-neutral-700 lg:text-3xl">
-            Excellent! <br /> Vous avez terminé la leçon de programmation.
+            Bravo ! <br /> Vous avez terminé la leçon de programmation.
           </h1>
 
           <div className="flex w-full items-center gap-x-4">
