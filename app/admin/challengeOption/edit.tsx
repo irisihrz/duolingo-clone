@@ -1,6 +1,6 @@
 import {
-  BooleanInput,
   Edit,
+  NumberInput,
   ReferenceInput,
   SimpleForm,
   TextInput,
@@ -11,11 +11,11 @@ export const ChallengeOptionEdit = () => {
   return (
     <Edit>
       <SimpleForm>
-        <TextInput source="text" validate={[required()]} label="Text" />
-        <BooleanInput source="correct" label="Correct option" />
+        <NumberInput source="id" validate={[required()]} label="Id" />
+        <TextInput source="text" validate={[required()]} label="Texte" />
+        <TextInput source="correct" validate={[required()]} label="Correct" />
         <ReferenceInput source="challengeId" reference="challenges" />
-        <TextInput source="imageSrc" label="Image URL" />
-        <TextInput source="audioSrc" label="Audio URL" />
+        <TextInput source="imageSrc" label="URL de l'image" />
       </SimpleForm>
     </Edit>
   );

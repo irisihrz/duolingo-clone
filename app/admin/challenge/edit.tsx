@@ -12,23 +12,28 @@ export const ChallengeEdit = () => {
   return (
     <Edit>
       <SimpleForm>
+        <NumberInput source="id" validate={[required()]} label="Id" />
         <TextInput source="question" validate={[required()]} label="Question" />
-        <SelectInput
-          source="type"
+        <TextInput
+          source="challengeType"
           validate={[required()]}
+          label="Type de défi"
+        />
+        <SelectInput
+          source="challengeType"
           choices={[
             {
               id: "SELECT",
-              name: "SELECT",
+              name: "Sélection",
             },
             {
               id: "ASSIST",
-              name: "ASSIST",
+              name: "Assistance",
             },
           ]}
         />
         <ReferenceInput source="lessonId" reference="lessons" />
-        <NumberInput source="order" validate={required()} label="Order" />
+        <NumberInput source="order" validate={required()} label="Ordre" />
       </SimpleForm>
     </Edit>
   );
