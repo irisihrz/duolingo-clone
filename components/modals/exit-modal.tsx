@@ -47,7 +47,7 @@ export const ExitModal = () => {
           </DialogDescription>
 
           <p className="text-center text-sm text-muted-foreground">
-            Vous êtes s&apos;ûr de vouloir quitter ? Votre progression ne sera pas sauvegardée.
+            Vous êtes sûr de vouloir quitter&nbsp;? Votre progression ne sera pas sauvegardée.
           </p>
         </DialogHeader>
 

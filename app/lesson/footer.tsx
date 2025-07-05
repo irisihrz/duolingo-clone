@@ -1,9 +1,8 @@
 "use client";
 
-import { Heart } from "lucide-react";
-
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { useHeartsModal } from "@/store/use-hearts-modal";
