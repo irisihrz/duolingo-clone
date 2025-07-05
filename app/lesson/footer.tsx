@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+
 import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -109,4 +110,4 @@ export const Footer = ({
       </div>
     </footer>
   );
-};
+}; 

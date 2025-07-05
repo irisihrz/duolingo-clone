@@ -47,7 +47,7 @@ export const ExitModal = () => {
           </DialogDescription>
 
           <p className="text-center text-sm text-muted-foreground">
-            Vous êtes sûr de vouloir quitter&nbsp;? Votre progression ne sera pas sauvegardée.
+            Vous êtes s&apos;ûr de vouloir quitter&nbsp;? Votre progression ne sera pas sauvegardée.
           </p>
         </DialogHeader>
 
@@ -59,7 +59,7 @@ export const ExitModal = () => {
               size="lg"
               onClick={close}
             >
-              Continuer l'apprentissage
+              Continuer l&apos;apprentissage
             </Button>
 
             <Button
@@ -78,4 +78,4 @@ export const ExitModal = () => {
       </DialogContent>
     </Dialog>
   );
-};
+}; 
