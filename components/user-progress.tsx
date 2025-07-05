@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { courses } from "@/db/schema";
 
 type UserProgressProps = {
-  activeCourse: typeof courses.$inferSelect;
+  activeCourse: typeof courses.$inferSelect | null;
   hearts: number;
   points: number;
   hasActiveSubscription: boolean;
@@ -22,13 +22,19 @@ export const UserProgress = ({
     <div className="flex w-full items-center justify-between gap-x-2">
       <Link href="/courses">
         <Button variant="ghost">
-          <Image
-            src={activeCourse.imageSrc}
-            alt={activeCourse.title}
-            className="rounded-md border"
-            width={32}
-            height={32}
-          />
+          {activeCourse ? (
+            <Image
+              src={activeCourse.imageSrc}
+              alt={activeCourse.title}
+              className="rounded-md border"
+              width={32}
+              height={32}
+            />
+          ) : (
+            <div className="h-8 w-8 rounded-md border bg-gray-200 flex items-center justify-center">
+              <span className="text-xs text-gray-500">?</span>
+            </div>
+          )}
         </Button>
       </Link>
 
