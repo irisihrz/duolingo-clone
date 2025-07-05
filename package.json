@@ -14,9 +14,8 @@
     "db:prod": "tsx ./scripts/prod.ts"
   },
   "author": {
-    "name": "Iris",
-    "email": "contact@hellorooty.com"
-  },
+    "name": "Iris"
+    },
   "description": "Plateforme interactive pour apprendre les langages de programmation de façon ludique et progressive.",
   "keywords": [
     "reactjs",
