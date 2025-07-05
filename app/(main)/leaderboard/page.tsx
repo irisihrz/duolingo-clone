@@ -49,7 +49,7 @@ const LeaderboardPage = async () => {
             />
 
             <h1 className="my-6 text-center text-2xl font-bold text-neutral-800">
-              Leaderboard
+              Classement
             </h1>
             <p className="mb-6 text-center text-lg text-muted-foreground">
               Voyez où vous vous situez parmi les autres apprenants de la communauté.

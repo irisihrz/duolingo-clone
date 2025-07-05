@@ -64,7 +64,7 @@ export const Items = ({
       </div>
 
       <div className="flex w-full items-center gap-x-4 rounded-xl border-2 p-4">
-        <Image src="/unlimited.svg" alt="Unlimited" height={60} width={60} />
+        <Image src="/unlimited.svg" alt="Illimité" height={60} width={60} />
         <div className="flex-1">
           <p className="text-lg font-bold text-neutral-700">Illimité</p>
           <p className="text-sm text-muted-foreground">
