@@ -34,7 +34,7 @@ export const upsertUserProgress = async (courseId: number) => {
       .update(userProgress)
       .set({
         activeCourseId: courseId,
-        userName: user.firstName || "User",
+        userName: user.firstName || "Utilisateur",
         userImageSrc: user.imageUrl || "/hellorooty.png",
       })
       .where(eq(userProgress.userId, userId));
@@ -47,7 +47,7 @@ export const upsertUserProgress = async (courseId: number) => {
   await db.insert(userProgress).values({
     userId,
     activeCourseId: courseId,
-    userName: user.firstName || "User",
+    userName: user.firstName || "Utilisateur",
     userImageSrc: user.imageUrl || "/hellorooty.png",
   });
 

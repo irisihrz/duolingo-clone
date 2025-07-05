@@ -16,7 +16,7 @@ export const createStripeUrl = async () => {
 
   const userSubscription = await getUserSubscription();
 
-  // redirect user to customer portal who already have a subscription
+  // rediriger l'utilisateur vers le portail client s'il a déjà un abonnement
   if (userSubscription && userSubscription.stripeCustomerId) {
     const stripeSession = await stripe.billingPortal.sessions.create({
       customer: userSubscription.stripeCustomerId,
@@ -26,7 +26,7 @@ export const createStripeUrl = async () => {
     return { data: stripeSession.url };
   }
 
-  // checkout
+  // paiement
   const stripeSession = await stripe.checkout.sessions.create({
     mode: "subscription",
     payment_method_types: ["card"],

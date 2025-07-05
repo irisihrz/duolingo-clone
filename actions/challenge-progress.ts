@@ -12,18 +12,18 @@ import { challengeProgress, challenges, userProgress } from "@/db/schema";
 export const upsertChallengeProgress = async (challengeId: number) => {
   const { userId } = await auth();
 
-  if (!userId) throw new Error("Unauthorized.");
+  if (!userId) throw new Error("Non autorisé.");
 
   const currentUserProgress = await getUserProgress();
   const userSubscription = await getUserSubscription();
 
-  if (!currentUserProgress) throw new Error("User progress not found.");
+  if (!currentUserProgress) throw new Error("Progression de l'utilisateur introuvable.");
 
   const challenge = await db.query.challenges.findFirst({
     where: eq(challenges.id, challengeId),
   });
 
-  if (!challenge) throw new Error("Challenge not found.");
+  if (!challenge) throw new Error("Défi introuvable.");
 
   const lessonId = challenge.lessonId;
 
