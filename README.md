@@ -2,8 +2,6 @@
 
 # HelloRooty - Plateforme interactive pour apprendre les langages de programmation
 
-![HelloRooty - Plateforme interactive pour apprendre le code.](https://raw.githubusercontent.com/sanidhyy/duolingo-clone/main/.github/images/img_main.png "HelloRooty - Plateforme interactive pour apprendre le code.")
-
 ---
 
 ## 🚀 Présentation
@@ -35,7 +33,7 @@ duolingo-clone/   # (Nom d'origine du dossier, à renommer si besoin)
 1. **Pré-requis** : Installe Node.js et Git.
 2. **Clone le dépôt** :
    ```bash
-   git clone https://github.com/irisihrz/duolingo-clone.git
+   git clone [URL_DU_REPO]
    cd duolingo-clone
    ```
 3. **Configuration** :
@@ -83,9 +81,11 @@ duolingo-clone/   # (Nom d'origine du dossier, à renommer si besoin)
 
 ## ✨ Exemples de captures d'écran
 
-![Exemple UI](/.github/images/img1.png)
-![Défis de code](/.github/images/img2.png)
-![Boutique](/.github/images/img3.png)
+L'application propose une interface moderne avec :
+- Des leçons interactives
+- Des défis de code
+- Une boutique avec des récompenses
+- Un système de progression
 
 ---
 
@@ -106,12 +106,6 @@ Toute contribution est la bienvenue !
 - [Clerk](https://clerk.com/)
 - [Neon Database](https://neon.tech/)
 - [Stripe](https://stripe.com/)
-
----
-
-## ⭐ Donne une étoile
-
-Si tu aimes ce projet, n'hésite pas à lui donner une étoile sur GitHub pour le soutenir !
 
 ---
 
