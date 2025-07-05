@@ -132,7 +132,7 @@ export const Quiz = ({
               setHearts((prev) => Math.min(prev + 1, MAX_HEARTS));
             }
           })
-          .catch(() => toast.error("Something went wrong. Please try again."));
+          .catch(() => toast.error("Une erreur s'est produite. Veuillez réessayer."));
       });
     } else {
       startTransition(() => {
@@ -148,7 +148,7 @@ export const Quiz = ({
 
             if (!response?.error) setHearts((prev) => Math.max(prev - 1, 0));
           })
-          .catch(() => toast.error("Something went wrong. Please try again."));
+          .catch(() => toast.error("Une erreur s'est produite. Veuillez réessayer."));
       });
     }
   };
