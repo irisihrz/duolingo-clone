@@ -88,7 +88,7 @@ export const Items = ({
           </p>
         </div>
 
-        <Button onClick={onUpgrade} disabled={pending} aria-disabled={pending}>
+        <Button onClick={onUpgradeClick} disabled={pending} aria-disabled={pending}>
           {hasActiveSubscription ? "Paramètres" : "Améliorer"}
         </Button>
       </div>
