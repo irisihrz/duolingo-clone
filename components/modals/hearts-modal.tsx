@@ -48,7 +48,7 @@ export const HeartsModal = () => {
           </DialogTitle>
 
           <DialogDescription className="text-center text-base">
-            Passez Pro pour des cœurs illimités, ou achetez-en dans la boutique.
+            Vous avez perdu tous vos cœurs. Obtenez plus de cœurs pour continuer à apprendre !
           </DialogDescription>
         </DialogHeader>
 

@@ -64,7 +64,6 @@ export const Quiz = ({
     if (initialPercentage === 100) openPracticeModal();
   });
 
-  const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(() => {
     return initialPercentage === 100 ? 0 : initialPercentage;

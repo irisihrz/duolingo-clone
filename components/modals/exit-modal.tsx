@@ -45,6 +45,10 @@ export const ExitModal = () => {
           <DialogDescription className="text-center text-base">
             Vous êtes sur le point de quitter la leçon. Êtes-vous sûr ?
           </DialogDescription>
+
+          <p className="text-center text-sm text-muted-foreground">
+            Vous êtes sûr de vouloir quitter ? Votre progression ne sera pas sauvegardée.
+          </p>
         </DialogHeader>
 
         <DialogFooter className="mb-4">

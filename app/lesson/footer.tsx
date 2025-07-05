@@ -1,8 +1,9 @@
 "use client";
 
-import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+
+import { Heart } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useHeartsModal } from "@/store/use-hearts-modal";
@@ -21,7 +22,6 @@ export const Footer = ({
   status,
   onCheck,
   hearts,
-  percentage,
 }: FooterProps) => {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
