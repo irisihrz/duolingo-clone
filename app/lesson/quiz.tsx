@@ -195,9 +195,10 @@ export const Quiz = ({
         </div>
 
         <Footer
-          lessonId={lessonId}
           status="completed"
           onCheck={() => router.push("/learn")}
+          hearts={hearts}
+          percentage={percentage}
         />
       </>
     );
@@ -245,8 +246,10 @@ export const Quiz = ({
 
       <Footer
         disabled={pending || !selectedOption}
-        status={status}
+        status={status === "correct" ? "completed" : status === "wrong" ? "none" : status}
         onCheck={onContinue}
+        hearts={hearts}
+        percentage={percentage}
       />
     </>
   );
