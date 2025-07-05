@@ -47,7 +47,7 @@ export const Header = () => {
               <SignedOut>
                 <SignInButton>
                   <Button size="lg" variant="ghost">
-                    Login
+                    Connexion
                   </Button>
                 </SignInButton>
               </SignedOut>

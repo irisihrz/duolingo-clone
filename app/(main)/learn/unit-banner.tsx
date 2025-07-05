@@ -23,7 +23,7 @@ export const UnitBanner = ({ title, description }: UnitBannerProps) => {
           className="hidden border-2 border-b-4 active:border-b-2 xl:flex"
         >
           <NotebookText className="mr-2" />
-          Continue
+          Continuer
         </Button>
       </Link>
     </div>

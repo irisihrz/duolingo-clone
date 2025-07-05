@@ -1,71 +1,112 @@
-import { CheckCircle, XCircle } from "lucide-react";
-import { useKey, useMedia } from "react-use";
+"use client";
+
+import { Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useHeartsModal } from "@/store/use-hearts-modal";
+import { usePracticeModal } from "@/store/use-practice-modal";
 
 type FooterProps = {
-  onCheck: () => void;
-  status: "correct" | "wrong" | "none" | "completed";
   disabled?: boolean;
-  lessonId?: number;
+  status: "completed" | "hearts" | "none";
+  onCheck: () => void;
+  hearts: number;
+  percentage: number;
 };
 
 export const Footer = ({
-  onCheck,
-  status,
   disabled,
-  lessonId,
+  status,
+  onCheck,
+  hearts,
+  percentage,
 }: FooterProps) => {
-  useKey("Enter", onCheck, {}, [onCheck]);
-  const isMobile = useMedia("(max-width: 1024px)");
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+  const { open: openHeartsModal } = useHeartsModal();
+  const { open: openPracticeModal } = usePracticeModal();
+
+  const onPractice = () => {
+    startTransition(() => {
+      openPracticeModal();
+    });
+  };
+
+  const onExit = () => {
+    startTransition(() => {
+      router.push("/learn");
+    });
+  };
 
   return (
-    <footer
-      className={cn(
-        "h-[100px] border-t-2 lg:h-[140px]",
-        status === "correct" && "border-transparent bg-green-100",
-        status === "wrong" && "border-transparent bg-rose-100"
-      )}
-    >
-      <div className="mx-auto flex h-full max-w-[1140px] items-center justify-between px-6 lg:px-10">
-        {status === "correct" && (
-          <div className="flex items-center text-base font-bold text-green-500 lg:text-2xl">
-            <CheckCircle className="mr-4 h-6 w-6 lg:h-10 lg:w-10" />
-            Nicely done!
+    <footer className="lg:h-[140px] lg:px-10">
+      <div className="mx-auto flex h-full max-w-[1140px] items-center justify-between gap-x-6 border-t-2 bg-white px-6 py-4 lg:px-0">
+        <div className="flex items-center gap-x-4">
+          <div className="flex items-center gap-x-2">
+            <Heart
+              fill={hearts > 0 ? "#ef4444" : "#fbbf24"}
+              className="h-6 w-6"
+            />
+            <span className="text-lg font-bold text-slate-500">
+              {hearts}
+            </span>
           </div>
-        )}
+        </div>
 
-        {status === "wrong" && (
-          <div className="flex items-center text-base font-bold text-rose-500 lg:text-2xl">
-            <XCircle className="mr-4 h-6 w-6 lg:h-10 lg:w-10" />
-            Try again.
-          </div>
-        )}
+        <div className="flex items-center gap-x-4">
+          {status === "completed" && (
+            <Button
+              disabled={pending}
+              onClick={onCheck}
+              className="w-full"
+              size="lg"
+            >
+              Continuer
+            </Button>
+          )}
 
-        {status === "completed" && (
+          {status === "hearts" && (
+            <Button
+              disabled={pending}
+              onClick={openHeartsModal}
+              className="w-full"
+              size="lg"
+            >
+              <Heart className="mr-2 h-5 w-5" />
+            </Button>
+          )}
+
+          {status === "none" && (
+            <Button
+              disabled={disabled || pending}
+              onClick={onCheck}
+              className="w-full"
+              size="lg"
+            >
+              Vérifier
+            </Button>
+          )}
+
           <Button
-            variant="default"
-            size={isMobile ? "sm" : "lg"}
-            onClick={() => (window.location.href = `/lesson/${lessonId}`)}
+            disabled={pending}
+            onClick={onPractice}
+            variant="ghost"
+            size="lg"
           >
-            Practice again
+            Pratiquer
           </Button>
-        )}
 
-        <Button
-          disabled={disabled}
-          aria-disabled={disabled}
-          className="ml-auto"
-          onClick={onCheck}
-          size={isMobile ? "sm" : "lg"}
-          variant={status === "wrong" ? "danger" : "secondary"}
-        >
-          {status === "none" && "Check"}
-          {status === "correct" && "Next"}
-          {status === "wrong" && "Retry"}
-          {status === "completed" && "Continue"}
-        </Button>
+          <Button
+            disabled={pending}
+            onClick={onExit}
+            variant="ghost"
+            size="lg"
+          >
+            Quitter
+          </Button>
+        </div>
       </div>
     </footer>
   );

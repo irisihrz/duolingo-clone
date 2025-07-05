@@ -44,11 +44,11 @@ export const HeartsModal = () => {
           </div>
 
           <DialogTitle className="text-center text-2xl font-bold">
-            You ran out of hearts!
+            Vous n'avez plus de cœurs !
           </DialogTitle>
 
           <DialogDescription className="text-center text-base">
-            Get Pro for unlimited hearts, or purchase them in the store.
+            Passez Pro pour des cœurs illimités, ou achetez-en dans la boutique.
           </DialogDescription>
         </DialogHeader>
 
@@ -60,7 +60,7 @@ export const HeartsModal = () => {
               size="lg"
               onClick={onClick}
             >
-              Get unlimited hearts
+              Obtenir des cœurs illimités
             </Button>
 
             <Button
@@ -69,7 +69,7 @@ export const HeartsModal = () => {
               size="lg"
               onClick={close}
             >
-              No thanks
+              Non merci
             </Button>
           </div>
         </DialogFooter>
